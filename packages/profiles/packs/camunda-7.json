@@ -1,0 +1,36 @@
+{
+  "id": "camunda-7",
+  "version": "7.23",
+  "capabilities": {
+    "engine": {
+      "kind": "embedded-jvm",
+      "vendor": "Camunda",
+      "lineage": "camunda-7"
+    },
+    "timers": {
+      "supportsCycleTimers": true,
+      "maxPrecisionMs": 100
+    },
+    "integrations": {
+      "boundaryTypes": ["rest", "queue", "event", "java-delegate", "external-task"],
+      "outboundPolicies": {
+        "retries": 3,
+        "circuitBreaker": "available"
+      }
+    },
+    "expressions": {
+      "languages": ["juel", "feel"],
+      "sandboxed": false
+    },
+    "scripting": {
+      "embedded": true,
+      "formats": ["groovy", "javascript", "feel", "juel"],
+      "allowsNodeExtensions": true,
+      "deterministicApis": ["clock.now"]
+    },
+    "decisions": {
+      "dmn": true,
+      "feelDialect": "1.3"
+    }
+  }
+}

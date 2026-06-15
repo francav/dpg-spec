@@ -1,0 +1,37 @@
+{
+  "id": "cib-seven",
+  "version": "2.2",
+  "capabilities": {
+    "engine": {
+      "kind": "embedded-jvm",
+      "vendor": "CIB",
+      "lineage": "camunda-7",
+      "fork": true
+    },
+    "timers": {
+      "supportsCycleTimers": true,
+      "maxPrecisionMs": 100
+    },
+    "integrations": {
+      "boundaryTypes": ["rest", "queue", "event", "java-delegate", "external-task"],
+      "outboundPolicies": {
+        "retries": 3,
+        "circuitBreaker": "available"
+      }
+    },
+    "expressions": {
+      "languages": ["juel", "feel"],
+      "sandboxed": false
+    },
+    "scripting": {
+      "embedded": true,
+      "formats": ["groovy", "javascript", "feel", "juel"],
+      "allowsNodeExtensions": true,
+      "deterministicApis": ["clock.now"]
+    },
+    "decisions": {
+      "dmn": true,
+      "feelDialect": "1.3"
+    }
+  }
+}

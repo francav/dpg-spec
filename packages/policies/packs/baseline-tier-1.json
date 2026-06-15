@@ -1,0 +1,18 @@
+{
+  "id": "standard-governance-policy",
+  "version": "0.9",
+  "governanceTier": "tier-1",
+  "determinism": {
+    "axisY": { "minimum": "deterministic" },
+    "axisX": { "default": "profileScoped" }
+  },
+  "runtimeProfileRequired": true,
+  "ruleToggles": {
+    "STRUCTURAL_WELL_FORMED": true,
+    "STRUCTURAL_BOUNDARY_MATCH": true,
+    "SEMANTIC_DETERMINISM_AXIS_Y": true,
+    "SEMANTIC_DETERMINISM_AXIS_X": true,
+    "RUNTIME_DEPENDENCY_DISCOVERY": true,
+    "LEGACY_GATEWAY_COMPAT": false
+  }
+}

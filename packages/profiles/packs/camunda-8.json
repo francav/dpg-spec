@@ -1,0 +1,36 @@
+{
+  "id": "camunda-8",
+  "version": "8.7",
+  "capabilities": {
+    "engine": {
+      "kind": "distributed-zeebe",
+      "vendor": "Camunda",
+      "lineage": "camunda-8"
+    },
+    "timers": {
+      "supportsCycleTimers": true,
+      "maxPrecisionMs": 1000
+    },
+    "integrations": {
+      "boundaryTypes": ["job-worker", "connector", "rest", "event"],
+      "outboundPolicies": {
+        "retries": 3,
+        "circuitBreaker": "connector-managed"
+      }
+    },
+    "expressions": {
+      "languages": ["feel"],
+      "sandboxed": true
+    },
+    "scripting": {
+      "embedded": false,
+      "formats": ["feel"],
+      "allowsNodeExtensions": false,
+      "deterministicApis": []
+    },
+    "decisions": {
+      "dmn": true,
+      "feelDialect": "1.3"
+    }
+  }
+}

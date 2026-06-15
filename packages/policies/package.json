@@ -9,15 +9,20 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./packs/*": "./packs/*.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "packs"
   ],
   "scripts": {
     "build": "tsc -b",
     "test": "vitest run",
     "lint": "eslint .",
     "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@dpg/spec": "*"
   }
 }

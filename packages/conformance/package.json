@@ -9,15 +9,24 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./fixtures/*": "./fixtures/*",
+    "./vectors/*": "./vectors/*.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "fixtures",
+    "vectors",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc -b",
     "test": "vitest run",
+    "fixtures": "node ./scripts/run-fixtures.mjs",
     "lint": "eslint .",
     "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@dpg/spec": "*"
   }
 }
