@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/spec" },
+    { "path": "packages/profiles" },
+    { "path": "packages/policies" },
+    { "path": "packages/conformance" }
+  ]
+}
