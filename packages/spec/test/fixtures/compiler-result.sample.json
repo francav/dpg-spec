@@ -1,0 +1,456 @@
+{
+  "metadata": {
+    "compilerVersion": "0.1.0",
+    "timestamp": "2026-06-15T21:49:29.000Z",
+    "modelId": "fixtures/loan-preapproval",
+    "inputHashes": {
+      "bpmn": "b38d1540d1d462c66d36bbccc9715d226c7a2babf706d1f153377c9fbeefa118",
+      "dmn": "ca585ef58c6728789816b7b1be298e67b43422af86ced16ce6a1dfa54cfedb4e"
+    },
+    "policyId": "standard-governance-policy",
+    "policyVersion": "0.9",
+    "runtimeProfileId": "standard-runtime-profile",
+    "runtimeProfileVersion": "2024.1",
+    "governanceTier": "tier-1",
+    "degraded": false
+  },
+  "structuralFindings": [],
+  "semanticFindings": [
+    {
+      "id": "80de9b0528cb9518f58a49872855d4978dfea0cd",
+      "category": "semantic",
+      "severity": "info",
+      "confidence": 1,
+      "message": "exclusive gateway missing default flow; could not verify exhaustive condition coverage",
+      "targetId": "Gateway_RiskCheck",
+      "policyClause": "bpmn.gatewayConditionCoverage",
+      "ruleId": "gateway-semantic-analyzer"
+    },
+    {
+      "id": "80de9b0528cb9518f58a49872855d4978dfea0cd",
+      "category": "semantic",
+      "severity": "info",
+      "confidence": 1,
+      "message": "exclusive gateway missing default flow; could not verify exhaustive condition coverage",
+      "targetId": "Gateway_Approval",
+      "policyClause": "bpmn.gatewayConditionCoverage",
+      "ruleId": "gateway-semantic-analyzer"
+    },
+    {
+      "id": "dc18111a9c26f9e2462e8350115a981936c41a5c",
+      "category": "semantic",
+      "severity": "info",
+      "confidence": 1,
+      "message": "Script task has no script body (metadata extraction may be incomplete)",
+      "targetId": "ScriptTask_InterestRate",
+      "ruleId": "script-determinism-classification"
+    }
+  ],
+  "determinismMap": [
+    {
+      "evaluationPointId": "BusinessRuleTask_Eligibility:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:0:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:1:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:2:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:0:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:1:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:2:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Flow_4_LowRisk",
+      "axisY": "deterministic",
+      "axisX": "profileScoped",
+      "confidence": 0.95,
+      "policyClause": "determinism.gatewayConditions",
+      "runtimeProfileSection": "gatewayConditions",
+      "ruleId": "gateway-condition-analysis"
+    },
+    {
+      "evaluationPointId": "Flow_8_Approved",
+      "axisY": "deterministic",
+      "axisX": "engineSpecific",
+      "confidence": 0.95,
+      "policyClause": "determinism.gatewayConditions",
+      "runtimeProfileSection": "gatewayConditions",
+      "ruleId": "gateway-condition-analysis"
+    },
+    {
+      "evaluationPointId": "ServiceTask_CreditCheck",
+      "axisY": "unknown",
+      "axisX": "unknown",
+      "confidence": 0.5,
+      "policyClause": "service-task-determinism",
+      "ruleId": "SERVICE_TASK_DETERMINISM"
+    },
+    {
+      "evaluationPointId": "ServiceTask_ManualReview",
+      "axisY": "unknown",
+      "axisX": "unknown",
+      "confidence": 0.5,
+      "policyClause": "service-task-determinism",
+      "ruleId": "SERVICE_TASK_DETERMINISM"
+    }
+  ],
+  "runtimeDependencyMap": [
+    {
+      "evaluationPointId": "BusinessRuleTask_Eligibility:evaluation",
+      "dependency": "expression",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:0:evaluation",
+      "dependency": "Rule_1:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:1:evaluation",
+      "dependency": "Rule_2:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_LoanApproval:rule:2:evaluation",
+      "dependency": "Rule_3:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:0:evaluation",
+      "dependency": "Rule_Risk_1:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:1:evaluation",
+      "dependency": "Rule_Risk_2:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_RiskCategory:rule:2:evaluation",
+      "dependency": "Rule_Risk_3:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "ServiceTask_CreditCheck",
+      "dependency": "unknown",
+      "profileCoverage": "documented",
+      "policyClause": "runtime-coupling",
+      "ruleId": "SERVICE_TASK_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "ServiceTask_ManualReview",
+      "dependency": "unknown",
+      "profileCoverage": "documented",
+      "policyClause": "runtime-coupling",
+      "ruleId": "SERVICE_TASK_CLASSIFICATION"
+    }
+  ],
+  "decisionAnalysis": [
+    {
+      "decisionId": "Decision_LoanApproval",
+      "hitPolicy": "FIRST",
+      "rules": 0,
+      "overlaps": 0,
+      "gaps": 1,
+      "unreachableRules": [],
+      "shadowedRules": [],
+      "runtimeDependence": "profileScoped",
+      "severity": "info",
+      "policyClause": "dmn.completeness",
+      "missingCombinations": ["[object Object]=null"],
+      "overlappingRules": []
+    },
+    {
+      "decisionId": "Decision_RiskCategory",
+      "hitPolicy": "FIRST",
+      "rules": 0,
+      "overlaps": 0,
+      "gaps": 1,
+      "unreachableRules": [],
+      "shadowedRules": [],
+      "runtimeDependence": "profileScoped",
+      "severity": "info",
+      "policyClause": "dmn.completeness",
+      "missingCombinations": ["[object Object]=null"],
+      "overlappingRules": []
+    }
+  ],
+  "contractCoverage": [],
+  "summary": {
+    "structuralErrors": 0,
+    "semanticErrors": 0,
+    "warnings": 0,
+    "determinismCompliance": true,
+    "runtimeProfileMissing": false,
+    "contractCoverageRatio": 0,
+    "decisionAnalysisStatus": "complete",
+    "governanceTier": "tier-1",
+    "maturitySignal": {
+      "deterministicAgnostic": 0,
+      "deterministicBound": 18,
+      "policyDependentAgnostic": 0,
+      "policyDependentBound": 64,
+      "nonDeterministicAgnostic": 0,
+      "nonDeterministicBound": 0,
+      "totalEvaluationPoints": 11,
+      "deterministicTotal": 82,
+      "portableTotal": 18
+    }
+  },
+  "expressionDescriptors": [
+    {
+      "id": "expr:Flow_4_LowRisk",
+      "language": "feel",
+      "text": "eligibilityScore\n                > 700",
+      "content": "eligibilityScore\n                > 700",
+      "hint": "pure",
+      "nodeId": "Flow_4_LowRisk",
+      "determinism": "deterministic",
+      "functionsUsed": [],
+      "elementType": "sequenceFlow"
+    },
+    {
+      "id": "expr:Flow_8_Approved",
+      "language": "juel",
+      "text": "${approved == true}",
+      "content": "${approved == true}",
+      "hint": "pure",
+      "nodeId": "Flow_8_Approved",
+      "determinism": "deterministic",
+      "functionsUsed": [],
+      "elementType": "sequenceFlow"
+    },
+    {
+      "id": "expr:ScriptTask_InterestRate",
+      "language": "groovy",
+      "text": "// Non-deterministic: uses current date for rate calculation\n                def today = new Date()\n                def baseRate = 3.5\n                def seasonalAdjustment = (today.getMonth() > 6) ? 0.2 : -0.1\n                execution.setVariable(\"interestRate\", baseRate + seasonalAdjustment)",
+      "content": "// Non-deterministic: uses current date for rate calculation\n                def today = new Date()\n                def baseRate = 3.5\n                def seasonalAdjustment = (today.getMonth() > 6) ? 0.2 : -0.1\n                execution.setVariable(\"interestRate\", baseRate + seasonalAdjustment)",
+      "hint": "runtime",
+      "nodeId": "ScriptTask_InterestRate",
+      "determinism": "policyDependent",
+      "functionsUsed": [],
+      "elementType": "scriptTask"
+    }
+  ],
+  "gatewayDescriptors": [
+    {
+      "gatewayId": "Gateway_RiskCheck",
+      "type": "exclusive",
+      "conditionCoverage": false,
+      "determinism": "deterministic",
+      "outgoingFlows": [
+        {
+          "flowId": "Flow_4_LowRisk",
+          "hasCondition": true,
+          "conditionDeterminism": "deterministic"
+        },
+        {
+          "flowId": "Flow_5_HighRisk",
+          "hasCondition": false
+        }
+      ]
+    },
+    {
+      "gatewayId": "Gateway_Approval",
+      "type": "exclusive",
+      "conditionCoverage": false,
+      "determinism": "deterministic",
+      "outgoingFlows": [
+        {
+          "flowId": "Flow_8_Approved",
+          "hasCondition": true,
+          "conditionDeterminism": "deterministic"
+        },
+        {
+          "flowId": "Flow_9_Rejected",
+          "hasCondition": false
+        }
+      ]
+    }
+  ],
+  "dmnExpressionDescriptors": [
+    {
+      "id": "Decision_LoanApproval:input:0",
+      "decisionId": "Decision_LoanApproval",
+      "expressionType": "input",
+      "language": "feel",
+      "content": "riskCategory",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_LoanApproval:rule:0:output:0",
+      "decisionId": "Decision_LoanApproval",
+      "ruleId": "Decision_LoanApproval:rule:0",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"APPROVE\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_LoanApproval:rule:1:output:0",
+      "decisionId": "Decision_LoanApproval",
+      "ruleId": "Decision_LoanApproval:rule:1",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"REVIEW\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_LoanApproval:rule:2:output:0",
+      "decisionId": "Decision_LoanApproval",
+      "ruleId": "Decision_LoanApproval:rule:2",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"REJECT\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_RiskCategory:input:0",
+      "decisionId": "Decision_RiskCategory",
+      "expressionType": "input",
+      "language": "feel",
+      "content": "creditScore",
+      "typeRef": "number",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_RiskCategory:rule:0:output:0",
+      "decisionId": "Decision_RiskCategory",
+      "ruleId": "Decision_RiskCategory:rule:0",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"LOW\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_RiskCategory:rule:1:output:0",
+      "decisionId": "Decision_RiskCategory",
+      "ruleId": "Decision_RiskCategory:rule:1",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"MEDIUM\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_RiskCategory:rule:2:output:0",
+      "decisionId": "Decision_RiskCategory",
+      "ruleId": "Decision_RiskCategory:rule:2",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"HIGH\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    }
+  ],
+  "dmnDecisionDescriptors": [
+    {
+      "decisionId": "Decision_LoanApproval",
+      "decisionName": "Decision_LoanApproval",
+      "hitPolicy": "FIRST",
+      "ruleCount": 3,
+      "ruleDeterminism": ["deterministic", "deterministic", "deterministic"],
+      "decisionDeterminism": "deterministic",
+      "inputCount": 1,
+      "outputCount": 1
+    },
+    {
+      "decisionId": "Decision_RiskCategory",
+      "decisionName": "Decision_RiskCategory",
+      "hitPolicy": "FIRST",
+      "ruleCount": 3,
+      "ruleDeterminism": ["deterministic", "deterministic", "deterministic"],
+      "decisionDeterminism": "deterministic",
+      "inputCount": 1,
+      "outputCount": 1
+    }
+  ],
+  "businessRuleTaskDescriptors": [
+    {
+      "taskId": "BusinessRuleTask_Eligibility",
+      "decisionRef": "eligibility-score",
+      "implementationType": "dmn",
+      "determinism": "unknown",
+      "coupling": "unknown",
+      "resolved": false
+    }
+  ]
+}

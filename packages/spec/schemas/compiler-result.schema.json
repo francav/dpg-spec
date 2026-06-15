@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/compiler-result.schema.json",
+  "title": "DPG L1 Compiler Result",
+  "description": "The output contract returned by the compiler: run metadata, structural/semantic findings, the determinism and runtime-dependency maps, decision and contract analysis, a summary, and optional descriptor catalogs. This is the normative shape of compileModel()'s resolved value.",
+  "$ref": "#/$defs/CompilerResult",
+  "$defs": {
+    "ResultMetadata": {
+      "title": "ResultMetadata",
+      "description": "Provenance of a compile result: compiler version, model identity, input hashes, and the policy / runtime profile in effect.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compilerVersion": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "modelId": { "type": "string" },
+        "inputHashes": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "bpmn": { "type": "string" },
+            "dmn": { "type": "string" }
+          }
+        },
+        "policyId": { "type": "string" },
+        "policyVersion": { "type": "string" },
+        "runtimeProfileId": { "type": "string" },
+        "runtimeProfileVersion": { "type": "string" },
+        "governanceTier": { "type": "string" },
+        "degraded": { "type": "boolean" }
+      },
+      "required": [
+        "compilerVersion",
+        "timestamp",
+        "modelId",
+        "inputHashes",
+        "policyId",
+        "policyVersion",
+        "governanceTier",
+        "degraded"
+      ]
+    },
+    "ResultSummary": {
+      "title": "ResultSummary",
+      "description": "Headline counts and compliance flags for a compile result.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "structuralErrors": { "type": "number" },
+        "semanticErrors": { "type": "number" },
+        "warnings": { "type": "number" },
+        "determinismCompliance": { "type": "boolean" },
+        "runtimeProfileMissing": { "type": "boolean" },
+        "contractCoverageRatio": { "type": "number" },
+        "decisionAnalysisStatus": { "type": "string", "enum": ["complete", "partial", "skipped"] },
+        "governanceTier": { "type": "string" },
+        "maturitySignal": {
+          "$ref": "https://spec.dpg.dev/l1/v1/runtime-profile.schema.json#/$defs/MaturitySignal"
+        }
+      },
+      "required": [
+        "structuralErrors",
+        "semanticErrors",
+        "warnings",
+        "determinismCompliance",
+        "runtimeProfileMissing",
+        "contractCoverageRatio",
+        "decisionAnalysisStatus",
+        "governanceTier"
+      ]
+    },
+    "CompilerResult": {
+      "title": "CompilerResult",
+      "description": "The complete analysis result returned by compileModel().",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metadata": { "$ref": "#/$defs/ResultMetadata" },
+        "structuralFindings": {
+          "type": "array",
+          "items": { "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/Finding" }
+        },
+        "semanticFindings": {
+          "type": "array",
+          "items": { "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/Finding" }
+        },
+        "determinismMap": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/DeterminismEntry"
+          }
+        },
+        "runtimeDependencyMap": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/runtime-profile.schema.json#/$defs/RuntimeDependencyEntry"
+          }
+        },
+        "decisionAnalysis": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/DecisionAnalysisEntry"
+          }
+        },
+        "contractCoverage": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/contract.schema.json#/$defs/ContractCoverageEntry"
+          }
+        },
+        "summary": { "$ref": "#/$defs/ResultSummary" },
+        "expressionDescriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/ExpressionDescriptor"
+          }
+        },
+        "gatewayDescriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/GatewayDescriptor"
+          }
+        },
+        "dmnExpressionDescriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/DmnExpressionDescriptor"
+          }
+        },
+        "dmnDecisionDescriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/DmnDecisionDescriptor"
+          }
+        },
+        "businessRuleTaskDescriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/contract.schema.json#/$defs/BusinessRuleTaskDescriptor"
+          }
+        }
+      },
+      "required": [
+        "metadata",
+        "structuralFindings",
+        "semanticFindings",
+        "determinismMap",
+        "runtimeDependencyMap",
+        "decisionAnalysis",
+        "contractCoverage",
+        "summary"
+      ]
+    }
+  }
+}

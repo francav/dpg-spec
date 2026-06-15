@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/classification.schema.json",
+  "title": "DPG L1 Classification Vocabulary",
+  "description": "Shared classification enumerations for the DPG L1 contract: the determinism (Axis Y) and runtime-dependence (Axis X) axes plus finding severity. Other L1 schemas reference these $defs so the vocabularies live in exactly one place.",
+  "$defs": {
+    "Severity": {
+      "title": "Severity",
+      "description": "Severity of a finding.",
+      "type": "string",
+      "enum": ["info", "warning", "error"]
+    },
+    "AxisYClass": {
+      "title": "AxisYClass",
+      "description": "Axis Y — Behavioral Determinism. The canonical determinism classification used across all semantic passes.",
+      "type": "string",
+      "enum": ["deterministic", "policyDependent", "runtimeBound", "nonDeterministic", "unknown"]
+    },
+    "AxisYClassCompat": {
+      "title": "AxisYClassCompat",
+      "description": "Axis Y with the legacy Sprint-3 alias accepted. Identical to AxisYClass plus the deprecated \"fullyDeterministic\" literal, which maps to \"deterministic\". Use AxisYClass for new producers; this compat form exists only where legacy inputs are still accepted.",
+      "type": "string",
+      "enum": [
+        "deterministic",
+        "policyDependent",
+        "runtimeBound",
+        "nonDeterministic",
+        "unknown",
+        "fullyDeterministic"
+      ],
+      "deprecated": false
+    },
+    "AxisXClass": {
+      "title": "AxisXClass",
+      "description": "Axis X — Runtime Dependence. The runtime-coupling classification used across all semantic passes.",
+      "type": "string",
+      "enum": ["engineAgnostic", "profileScoped", "engineSpecific", "externalized", "unknown"]
+    }
+  }
+}

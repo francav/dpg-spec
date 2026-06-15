@@ -9,13 +9,16 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./schemas/*": "./schemas/*.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "schemas"
   ],
   "scripts": {
     "build": "tsc -b",
+    "gen:types": "node scripts/gen-types.mjs",
     "test": "vitest run",
     "lint": "eslint .",
     "format:check": "prettier --check ."

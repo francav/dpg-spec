@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/contract.schema.json",
+  "title": "DPG L1 Contract Coverage",
+  "description": "Integration-boundary and contract-coverage surface: the IR nodes that mark a contract or integration boundary, the coverage report, and business-rule-task coupling.",
+  "$defs": {
+    "ContractNode": {
+      "title": "ContractNode",
+      "description": "IR node marking a declared interaction contract.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "const": "contract" },
+        "id": { "type": "string" },
+        "astNodeId": { "type": "string" }
+      },
+      "required": ["kind", "id", "astNodeId"]
+    },
+    "IntegrationBoundaryNode": {
+      "title": "IntegrationBoundaryNode",
+      "description": "IR node marking a boundary where the process delegates to an external integration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "const": "integration" },
+        "id": { "type": "string" },
+        "astNodeId": { "type": "string" },
+        "integrationType": { "type": "string" }
+      },
+      "required": ["kind", "id", "astNodeId", "integrationType"]
+    },
+    "ContractCoverageEntry": {
+      "title": "ContractCoverageEntry",
+      "description": "Coverage assessment for an integration boundary: how much of its interface is governed by a declared contract and the residual risk.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "boundaryId": { "type": "string" },
+        "contractId": { "type": "string" },
+        "coverageRatio": { "type": "number" },
+        "risk": { "type": "string", "enum": ["low", "medium", "high"] },
+        "issues": { "type": "array", "items": { "type": "string" } },
+        "policyClause": { "type": "string" },
+        "bpmnElementType": { "type": "string" },
+        "implementationType": { "type": "string" },
+        "hasDeclaredContract": { "type": "boolean" },
+        "contractReference": { "type": "string" },
+        "missingContract": { "type": "boolean" }
+      },
+      "required": ["boundaryId", "coverageRatio", "risk", "issues", "policyClause"]
+    },
+    "BusinessRuleTaskDescriptor": {
+      "title": "BusinessRuleTaskDescriptor",
+      "description": "A BPMN business rule task and its coupling to a decision: the implementation kind, propagated determinism, and runtime coupling.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "taskId": { "type": "string" },
+        "decisionRef": { "type": "string" },
+        "decisionName": { "type": "string" },
+        "implementationType": {
+          "type": "string",
+          "enum": ["dmn", "drl", "script", "external", "unknown"]
+        },
+        "determinism": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "coupling": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisXClass"
+        },
+        "resolved": { "type": "boolean" }
+      },
+      "required": [
+        "taskId",
+        "decisionRef",
+        "implementationType",
+        "determinism",
+        "coupling",
+        "resolved"
+      ]
+    }
+  }
+}

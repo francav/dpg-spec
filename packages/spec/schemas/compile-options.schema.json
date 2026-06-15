@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/compile-options.schema.json",
+  "title": "DPG L1 Compile Options",
+  "description": "The input contract accepted by the compiler: the model to analyze plus the policy / runtime-profile to evaluate it against. This is the normative shape of compileModel()'s argument.",
+  "$ref": "#/$defs/CompileOptions",
+  "$defs": {
+    "RunMetadata": {
+      "title": "RunMetadata",
+      "description": "Provenance metadata for a single compile run.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": { "type": "string" },
+        "caller": { "type": "string" },
+        "ingestionDurationMs": { "type": "number" }
+      },
+      "required": ["timestamp"]
+    },
+    "CompileOptions": {
+      "title": "CompileOptions",
+      "description": "Arguments to compileModel(). policy and runtimeProfile may be either a raw source string (YAML/JSON) or an already-loaded snapshot.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": { "type": "string" },
+        "governanceTier": { "type": "string" },
+        "policy": {
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "https://spec.dpg.dev/l1/v1/policy.schema.json#/$defs/PolicySnapshot" }
+          ]
+        },
+        "runtimeProfile": {
+          "anyOf": [
+            { "type": "string" },
+            {
+              "$ref": "https://spec.dpg.dev/l1/v1/runtime-profile.schema.json#/$defs/RuntimeProfileSnapshot"
+            }
+          ]
+        },
+        "bpmnXml": { "type": "string" },
+        "dmnXml": { "type": "string" },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "timestamp": { "type": "string" },
+            "caller": { "type": "string" },
+            "ingestionDurationMs": { "type": "number" }
+          }
+        }
+      },
+      "required": ["modelId"]
+    }
+  }
+}

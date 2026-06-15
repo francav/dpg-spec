@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/runtime-profile.schema.json",
+  "title": "DPG L1 Runtime Profile",
+  "description": "The runtime-profile input snapshot plus the runtime-dependence outputs: per-evaluation-point dependency coverage and the aggregate maturity signal (Axis X distribution).",
+  "$defs": {
+    "RuntimeProfileSnapshot": {
+      "title": "RuntimeProfileSnapshot",
+      "description": "A loaded runtime profile declaring the capabilities of a target execution engine.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "version": { "type": "string" },
+        "capabilities": { "type": "object", "additionalProperties": true }
+      },
+      "required": ["id", "version", "capabilities"]
+    },
+    "RuntimeDependencyEntry": {
+      "title": "RuntimeDependencyEntry",
+      "description": "A runtime dependency at an evaluation point and whether the active runtime profile documents it.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluationPointId": { "type": "string" },
+        "dependency": { "type": "string" },
+        "profileCoverage": {
+          "type": "string",
+          "enum": ["documented", "undocumented", "missingProfile"]
+        },
+        "policyClause": { "type": "string" },
+        "ruleId": { "type": "string" }
+      },
+      "required": ["evaluationPointId", "dependency", "profileCoverage", "policyClause", "ruleId"]
+    },
+    "MaturitySignal": {
+      "title": "MaturitySignal",
+      "description": "Aggregate distribution of evaluation points across the determinism/portability quadrants, expressed as percentages and totals.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deterministicAgnostic": { "type": "number" },
+        "deterministicBound": { "type": "number" },
+        "policyDependentAgnostic": { "type": "number" },
+        "policyDependentBound": { "type": "number" },
+        "nonDeterministicAgnostic": { "type": "number" },
+        "nonDeterministicBound": { "type": "number" },
+        "totalEvaluationPoints": { "type": "number" },
+        "deterministicTotal": { "type": "number" },
+        "portableTotal": { "type": "number" }
+      },
+      "required": [
+        "deterministicAgnostic",
+        "deterministicBound",
+        "policyDependentAgnostic",
+        "policyDependentBound",
+        "nonDeterministicAgnostic",
+        "nonDeterministicBound",
+        "totalEvaluationPoints",
+        "deterministicTotal",
+        "portableTotal"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "modelId": "fixtures/loan-preapproval",
+  "governanceTier": "standard",
+  "metadata": {
+    "caller": "l1-fixture-capture"
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.dpg.dev/l1/v1/policy.schema.json",
+  "title": "DPG L1 Policy & Diagnostics",
+  "description": "Governance policy inputs and the diagnostic / determinism surface the compiler emits: findings, per-evaluation-point determinism, and the expression / gateway / DMN descriptors that justify a classification.",
+  "$defs": {
+    "ExpressionLanguage": {
+      "title": "ExpressionLanguage",
+      "description": "Expression language detected for an expression or DMN clause.",
+      "type": "string",
+      "enum": [
+        "feel",
+        "juel",
+        "groovy",
+        "javascript",
+        "python",
+        "mvel",
+        "cib-proprietary",
+        "unknown"
+      ]
+    },
+    "Finding": {
+      "title": "Finding",
+      "description": "A structural, semantic, or ingestion diagnostic produced by the compiler.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string", "enum": ["structural", "semantic", "ingestion"] },
+        "severity": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/Severity"
+        },
+        "confidence": { "type": "number" },
+        "message": { "type": "string" },
+        "targetId": { "type": "string" },
+        "policyClause": { "type": "string" },
+        "runtimeProfileSection": { "type": "string" },
+        "ruleId": { "type": "string" },
+        "remediation": { "type": "string" }
+      },
+      "required": ["id", "category", "severity", "confidence", "message", "ruleId"]
+    },
+    "FindingDraft": {
+      "title": "FindingDraft",
+      "description": "A partially-specified finding before the compiler assigns an id, category, severity, and confidence.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "category": { "type": "string", "enum": ["structural", "semantic", "ingestion"] },
+        "severity": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/Severity"
+        },
+        "confidence": { "type": "number" },
+        "message": { "type": "string" },
+        "targetId": { "type": "string" },
+        "policyClause": { "type": "string" },
+        "runtimeProfileSection": { "type": "string" },
+        "ruleId": { "type": "string" },
+        "remediation": { "type": "string" }
+      },
+      "required": ["message", "ruleId"]
+    },
+    "PolicySnapshot": {
+      "title": "PolicySnapshot",
+      "description": "A loaded governance policy: its identity, the governance tier it applies, and its rule toggles.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "version": { "type": "string" },
+        "governanceTier": { "type": "string" },
+        "determinism": { "type": "object", "additionalProperties": true },
+        "runtimeProfileRequired": { "type": "boolean" },
+        "ruleToggles": { "type": "object", "additionalProperties": { "type": "boolean" } }
+      },
+      "required": ["id", "version", "governanceTier", "ruleToggles"]
+    },
+    "DeterminismEntry": {
+      "title": "DeterminismEntry",
+      "description": "Per-evaluation-point determinism classification along both axes. axisY/axisX reference the canonical classification vocabulary (the source TypeScript inlines identical literals).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluationPointId": { "type": "string" },
+        "axisY": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "axisX": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisXClass"
+        },
+        "confidence": { "type": "number" },
+        "policyClause": { "type": "string" },
+        "runtimeProfileSection": { "type": "string" },
+        "ruleId": { "type": "string" }
+      },
+      "required": ["evaluationPointId", "axisY", "axisX", "confidence", "policyClause", "ruleId"]
+    },
+    "ExpressionDescriptor": {
+      "title": "ExpressionDescriptor",
+      "description": "A single expression extracted from the model, with its detected language and determinism hint.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "language": { "$ref": "#/$defs/ExpressionLanguage" },
+        "text": { "type": "string" },
+        "content": { "type": "string" },
+        "hint": { "type": "string", "enum": ["pure", "runtime", "unknown"] },
+        "nodeId": { "type": "string" },
+        "determinism": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "functionsUsed": { "type": "array", "items": { "type": "string" } },
+        "elementType": { "type": "string" }
+      },
+      "required": ["id", "language", "text", "hint", "nodeId"]
+    },
+    "GatewayDescriptor": {
+      "title": "GatewayDescriptor",
+      "description": "Semantic descriptor for a BPMN gateway: its type, condition coverage, and per-outgoing-flow determinism.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gatewayId": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["exclusive", "inclusive", "parallel", "eventBased", "complex"]
+        },
+        "conditionCoverage": { "type": "boolean" },
+        "determinism": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "outgoingFlows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "flowId": { "type": "string" },
+              "hasCondition": { "type": "boolean" },
+              "conditionDeterminism": {
+                "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+              }
+            },
+            "required": ["flowId", "hasCondition"]
+          }
+        },
+        "defaultFlow": { "type": "string" }
+      },
+      "required": ["gatewayId", "type", "conditionCoverage", "outgoingFlows"]
+    },
+    "DmnExpressionDescriptor": {
+      "title": "DmnExpressionDescriptor",
+      "description": "An input or output expression within a DMN decision, with its determinism classification.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "decisionId": { "type": "string" },
+        "ruleId": { "type": "string" },
+        "expressionType": { "type": "string", "enum": ["input", "output"] },
+        "language": { "$ref": "#/$defs/ExpressionLanguage" },
+        "content": { "type": "string" },
+        "typeRef": { "type": "string" },
+        "determinism": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "functionsUsed": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": [
+        "id",
+        "decisionId",
+        "expressionType",
+        "language",
+        "content",
+        "determinism",
+        "functionsUsed"
+      ]
+    },
+    "DmnDecisionDescriptor": {
+      "title": "DmnDecisionDescriptor",
+      "description": "Aggregated determinism summary for a whole DMN decision table.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decisionId": { "type": "string" },
+        "decisionName": { "type": "string" },
+        "hitPolicy": { "type": "string" },
+        "aggregator": { "type": "string" },
+        "ruleCount": { "type": "number" },
+        "ruleDeterminism": {
+          "type": "array",
+          "items": {
+            "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+          }
+        },
+        "decisionDeterminism": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisYClass"
+        },
+        "inputCount": { "type": "number" },
+        "outputCount": { "type": "number" }
+      },
+      "required": [
+        "decisionId",
+        "decisionName",
+        "hitPolicy",
+        "ruleCount",
+        "ruleDeterminism",
+        "decisionDeterminism",
+        "inputCount",
+        "outputCount"
+      ]
+    },
+    "DecisionAnalysisEntry": {
+      "title": "DecisionAnalysisEntry",
+      "description": "Completeness analysis of a DMN decision table: overlaps, gaps, unreachable and shadowed rules, and the runtime dependence of the decision.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decisionId": { "type": "string" },
+        "hitPolicy": { "type": "string" },
+        "rules": { "type": "number" },
+        "overlaps": { "type": "number" },
+        "gaps": { "type": "number" },
+        "unreachableRules": { "type": "array", "items": { "type": "string" } },
+        "shadowedRules": { "type": "array", "items": { "type": "string" } },
+        "runtimeDependence": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/AxisXClass"
+        },
+        "severity": {
+          "$ref": "https://spec.dpg.dev/l1/v1/classification.schema.json#/$defs/Severity"
+        },
+        "policyClause": { "type": "string" },
+        "missingCombinations": { "type": "array", "items": { "type": "string" } },
+        "overlappingRules": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": [
+        "decisionId",
+        "hitPolicy",
+        "rules",
+        "overlaps",
+        "gaps",
+        "unreachableRules",
+        "shadowedRules",
+        "runtimeDependence",
+        "severity",
+        "policyClause"
+      ]
+    }
+  }
+}
