@@ -1,7 +1,17 @@
 {
   "name": "@francav/conformance",
   "version": "0.1.0",
-  "private": true,
+  "description": "DPG conformance suite: CC0 BPMN/DMN fixtures plus golden CompilerResult vectors for verifying a DPG-conformant compiler",
+  "license": "CC0-1.0",
+  "author": "Victor França",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francav/dpg-spec.git",
+    "directory": "packages/conformance"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,6 +27,7 @@
     "dist",
     "fixtures",
     "vectors",
+    "README.md",
     "LICENSE"
   ],
   "scripts": {
@@ -27,6 +38,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@francav/spec": "*"
+    "@francav/spec": "^0.1.0"
   }
 }
