@@ -1,7 +1,7 @@
 {
   "metadata": {
     "compilerVersion": "0.1.0",
-    "timestamp": "2026-06-15T22:23:19.988Z",
+    "timestamp": "2026-06-16T12:01:35.183Z",
     "modelId": "loan-preapproval",
     "inputHashes": {
       "bpmn": "e38fdb811e343104cdd166533f9beebe2c496bba5f94d6b1242672e118107828",
@@ -87,7 +87,8 @@
       "confidence": 0.8,
       "policyClause": "determinism.default",
       "runtimeProfileSection": "root",
-      "ruleId": "semantic-determinism"
+      "ruleId": "semantic-determinism",
+      "rationale": "Policy-driven evaluation point; determinism depends on policy declarations"
     },
     {
       "evaluationPointId": "eligibility-score:rule:0:evaluation",
@@ -96,7 +97,8 @@
       "confidence": 0.8,
       "policyClause": "determinism.default",
       "runtimeProfileSection": "root",
-      "ruleId": "semantic-determinism"
+      "ruleId": "semantic-determinism",
+      "rationale": "Policy-driven evaluation point; determinism depends on policy declarations"
     },
     {
       "evaluationPointId": "eligibility-score:rule:1:evaluation",
@@ -105,7 +107,8 @@
       "confidence": 0.8,
       "policyClause": "determinism.default",
       "runtimeProfileSection": "root",
-      "ruleId": "semantic-determinism"
+      "ruleId": "semantic-determinism",
+      "rationale": "Policy-driven evaluation point; determinism depends on policy declarations"
     },
     {
       "evaluationPointId": "eligibility-score:rule:2:evaluation",
@@ -114,7 +117,8 @@
       "confidence": 0.8,
       "policyClause": "determinism.default",
       "runtimeProfileSection": "root",
-      "ruleId": "semantic-determinism"
+      "ruleId": "semantic-determinism",
+      "rationale": "Policy-driven evaluation point; determinism depends on policy declarations"
     },
     {
       "evaluationPointId": "eligibility-score:rule:3:evaluation",
@@ -123,7 +127,8 @@
       "confidence": 0.8,
       "policyClause": "determinism.default",
       "runtimeProfileSection": "root",
-      "ruleId": "semantic-determinism"
+      "ruleId": "semantic-determinism",
+      "rationale": "Policy-driven evaluation point; determinism depends on policy declarations"
     },
     {
       "evaluationPointId": "Flow_4_LowRisk",
@@ -132,7 +137,8 @@
       "confidence": 0.95,
       "policyClause": "determinism.gatewayConditions",
       "runtimeProfileSection": "gatewayConditions",
-      "ruleId": "gateway-condition-analysis"
+      "ruleId": "gateway-condition-analysis",
+      "rationale": "Pure variable comparison"
     },
     {
       "evaluationPointId": "Flow_8_Approved",
@@ -141,7 +147,8 @@
       "confidence": 0.95,
       "policyClause": "determinism.gatewayConditions",
       "runtimeProfileSection": "gatewayConditions",
-      "ruleId": "gateway-condition-analysis"
+      "ruleId": "gateway-condition-analysis",
+      "rationale": "Pure variable comparison"
     },
     {
       "evaluationPointId": "ServiceTask_CreditCheck",
@@ -149,7 +156,8 @@
       "axisX": "externalized",
       "confidence": 0.9,
       "policyClause": "service-task-determinism",
-      "ruleId": "SERVICE_TASK_DETERMINISM"
+      "ruleId": "SERVICE_TASK_DETERMINISM",
+      "rationale": "Service task delegates to an external implementation (externalTask); side-effect not a function of declared inputs"
     },
     {
       "evaluationPointId": "ServiceTask_ManualReview",
@@ -157,7 +165,58 @@
       "axisX": "externalized",
       "confidence": 0.9,
       "policyClause": "service-task-determinism",
-      "ruleId": "SERVICE_TASK_DETERMINISM"
+      "ruleId": "SERVICE_TASK_DETERMINISM",
+      "rationale": "Service task delegates to an external implementation (externalTask); side-effect not a function of declared inputs"
+    },
+    {
+      "evaluationPointId": "StartEvent_1",
+      "axisY": "deterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.7,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "No uncontrolled input source; pass-through"
+    },
+    {
+      "evaluationPointId": "UserTask_SendApproval",
+      "axisY": "nonDeterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.8,
+      "policyClause": "determinism.humanInput",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "Human input is an uncontrolled input; output not a function of declared inputs"
+    },
+    {
+      "evaluationPointId": "UserTask_SendRejection",
+      "axisY": "nonDeterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.8,
+      "policyClause": "determinism.humanInput",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "Human input is an uncontrolled input; output not a function of declared inputs"
+    },
+    {
+      "evaluationPointId": "EndEvent_Approved",
+      "axisY": "deterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.7,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "No uncontrolled input source; pass-through"
+    },
+    {
+      "evaluationPointId": "EndEvent_Rejected",
+      "axisY": "deterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.7,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "No uncontrolled input source; pass-through"
     }
   ],
   "runtimeDependencyMap": [
@@ -209,6 +268,41 @@
       "profileCoverage": "documented",
       "policyClause": "runtime-coupling",
       "ruleId": "SERVICE_TASK_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "StartEvent_1",
+      "dependency": "startEvent",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.default",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "UserTask_SendApproval",
+      "dependency": "userTask",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.humanInput",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "UserTask_SendRejection",
+      "dependency": "userTask",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.humanInput",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "EndEvent_Approved",
+      "dependency": "endEvent",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.default",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "EndEvent_Rejected",
+      "dependency": "endEvent",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.default",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
     }
   ],
   "decisionAnalysis": [
@@ -265,15 +359,15 @@
     "decisionAnalysisStatus": "complete",
     "governanceTier": "tier-2",
     "maturitySignal": {
-      "deterministicAgnostic": 0,
-      "deterministicBound": 22,
+      "deterministicAgnostic": 21,
+      "deterministicBound": 14,
       "policyDependentAgnostic": 0,
-      "policyDependentBound": 56,
-      "nonDeterministicAgnostic": 0,
-      "nonDeterministicBound": 22,
-      "totalEvaluationPoints": 9,
-      "deterministicTotal": 78,
-      "portableTotal": 22
+      "policyDependentBound": 36,
+      "nonDeterministicAgnostic": 14,
+      "nonDeterministicBound": 14,
+      "totalEvaluationPoints": 14,
+      "deterministicTotal": 71,
+      "portableTotal": 36
     }
   },
   "expressionDescriptors": [

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "compilerVersion": "0.1.0",
-    "timestamp": "2026-06-15T22:23:19.970Z",
+    "timestamp": "2026-06-16T12:01:35.166Z",
     "modelId": "simple-process",
     "inputHashes": {
       "bpmn": "7c1d0fbb9cd1355802892deda8b330991d9ce2260f44cdcbf93d2d83ba0b29ff"
@@ -22,7 +22,28 @@
       "axisX": "unknown",
       "confidence": 0.5,
       "policyClause": "service-task-determinism",
-      "ruleId": "SERVICE_TASK_DETERMINISM"
+      "ruleId": "SERVICE_TASK_DETERMINISM",
+      "rationale": "Service task implementation is unrecognised; determinism cannot be established"
+    },
+    {
+      "evaluationPointId": "StartEvent_1",
+      "axisY": "deterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.7,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "No uncontrolled input source; pass-through"
+    },
+    {
+      "evaluationPointId": "EndEvent_1",
+      "axisY": "deterministic",
+      "axisX": "engineAgnostic",
+      "confidence": 0.7,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "FLOW_ELEMENT_DETERMINISM",
+      "rationale": "No uncontrolled input source; pass-through"
     }
   ],
   "runtimeDependencyMap": [
@@ -32,6 +53,20 @@
       "profileCoverage": "documented",
       "policyClause": "runtime-coupling",
       "ruleId": "SERVICE_TASK_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "StartEvent_1",
+      "dependency": "startEvent",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.default",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
+    },
+    {
+      "evaluationPointId": "EndEvent_1",
+      "dependency": "endEvent",
+      "profileCoverage": "documented",
+      "policyClause": "determinism.default",
+      "ruleId": "FLOW_ELEMENT_CLASSIFICATION"
     }
   ],
   "decisionAnalysis": [],
@@ -46,15 +81,15 @@
     "decisionAnalysisStatus": "skipped",
     "governanceTier": "tier-1",
     "maturitySignal": {
-      "deterministicAgnostic": 0,
+      "deterministicAgnostic": 67,
       "deterministicBound": 0,
       "policyDependentAgnostic": 0,
       "policyDependentBound": 0,
       "nonDeterministicAgnostic": 0,
       "nonDeterministicBound": 0,
-      "totalEvaluationPoints": 1,
-      "deterministicTotal": 0,
-      "portableTotal": 0
+      "totalEvaluationPoints": 3,
+      "deterministicTotal": 67,
+      "portableTotal": 67
     }
   }
 }

@@ -207,6 +207,11 @@ export const policySchema = {
         ruleId: {
           type: "string",
         },
+        rationale: {
+          type: "string",
+          description:
+            "Human-readable justification naming the source of (non-)determinism for this evaluation point. Optional for backward compatibility with legacy producers.",
+        },
       },
       required: ["evaluationPointId", "axisY", "axisX", "confidence", "policyClause", "ruleId"],
     },

@@ -102,6 +102,10 @@ export interface DeterminismEntry {
   policyClause: string;
   runtimeProfileSection?: string;
   ruleId: string;
+  /**
+   * Human-readable justification naming the source of (non-)determinism for this evaluation point. Optional for backward compatibility with legacy producers.
+   */
+  rationale?: string;
 }
 /**
  * A single expression extracted from the model, with its detected language and determinism hint.
