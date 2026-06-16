@@ -23,8 +23,8 @@ decision-only fixture.
 ## Golden vectors
 
 Each case has a captured `CompilerResult` in `../vectors/<case>.json`, produced by running the
-reference compiler (`@dpg/compiler-core`) over these exact inputs. `loan-preapproval` is captured
-under the `camunda-7` reference profile (`@dpg/profiles`) at governance tier-2, which is what makes
+reference compiler (`@francav/compiler-core`) over these exact inputs. `loan-preapproval` is captured
+under the `camunda-7` reference profile (`@francav/profiles`) at governance tier-2, which is what makes
 its external service tasks resolve as missing-contract integration boundaries.
 
 ## Usage
@@ -32,7 +32,7 @@ its external service tasks resolve as missing-contract integration boundaries.
 The package exposes the inputs and the golden vectors programmatically:
 
 ```js
-import { getConformanceFixtures, getConformanceVectors } from "@dpg/conformance";
+import { getConformanceFixtures, getConformanceVectors } from "@francav/conformance";
 
 for (const fixture of getConformanceFixtures()) {
   // feed fixture.bpmnXml / fixture.dmnXml into your compiler, then diff against the golden vector
@@ -42,5 +42,5 @@ for (const fixture of getConformanceFixtures()) {
 To eyeball the captured summaries and the Axis-Y distribution per case:
 
 ```bash
-npm run fixtures --workspace @dpg/conformance
+npm run fixtures --workspace @francav/conformance
 ```

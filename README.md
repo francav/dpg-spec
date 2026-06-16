@@ -10,10 +10,10 @@ Early development (0.1.0). Schemas and APIs are unstable and subject to change.
 
 ## Packages
 
-- `@dpg/spec` — core schemas
-- `@dpg/profiles` — conformance profiles
-- `@dpg/policies` — policy definitions
-- `@dpg/conformance` — conformance fixtures and test vectors
+- `@francav/spec` — core schemas
+- `@francav/profiles` — conformance profiles
+- `@francav/policies` — policy definitions
+- `@francav/conformance` — conformance fixtures and test vectors
 
 ## Develop
 

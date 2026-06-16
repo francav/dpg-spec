@@ -2,7 +2,7 @@
 // Copyright 2026 Victor França
 import Ajv2020, { type ValidateFunction } from "ajv/dist/2020.js";
 import { describe, expect, it } from "vitest";
-import { l1Schemas } from "@dpg/spec";
+import { l1Schemas } from "@francav/spec";
 import { POLICY_PACK_IDS, loadPolicyPack } from "./index.js";
 
 // WU-1.4 done-criterion: every reference policy pack validates against the L1 schemas.

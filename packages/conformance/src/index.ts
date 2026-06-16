@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Victor França
 import { readFileSync } from "node:fs";
-import type { CompilerResult } from "@dpg/spec";
+import type { CompilerResult } from "@francav/spec";
 
 /**
  * A conformance case: a CC0 BPMN/DMN input pairing plus the compiler configuration used to capture
@@ -15,7 +15,7 @@ export interface ConformanceCase {
   readonly bpmn: string;
   /** Optional DMN fixture path, relative to `fixtures/`. */
   readonly dmn?: string;
-  /** Reference profile pack id the vector was captured under (see `@dpg/profiles`). */
+  /** Reference profile pack id the vector was captured under (see `@francav/profiles`). */
   readonly runtimeProfileId?: string;
   /** Governance tier the vector was captured under. */
   readonly governanceTier?: string;

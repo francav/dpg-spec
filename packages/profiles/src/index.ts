@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Victor França
 import { readFileSync } from "node:fs";
-import type { RuntimeProfileSnapshot } from "@dpg/spec";
+import type { RuntimeProfileSnapshot } from "@francav/spec";
 
 /**
- * Reference runtime-profile packs shipped by @dpg/profiles. Each pack is a
+ * Reference runtime-profile packs shipped by @francav/profiles. Each pack is a
  * {@link RuntimeProfileSnapshot} that validates against the L1 runtime-profile schema and models
  * the capabilities a DPG-conformant engine exposes. `camunda-7`, `cib-seven`, and `operaton`
  * share the Camunda-7 lineage; `camunda-8` is the Zeebe-based successor.

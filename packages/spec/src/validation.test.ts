@@ -7,7 +7,7 @@ import { l1Schemas } from "./generated/schemas.js";
 
 // WU-1.3 done-criterion: real compiler I/O validates against the L1 schemas.
 // Fixtures are captured output of compileModel() over the CC0 loan-preapproval BPMN + loan-decision
-// DMN (see STATE.md). ajv is a dev-only dependency — @dpg/spec ships no validator of its own.
+// DMN (see STATE.md). ajv is a dev-only dependency — @francav/spec ships no validator of its own.
 
 const RESULT_ID = "https://spec.dpg.dev/l1/v1/compiler-result.schema.json";
 const OPTIONS_ID = "https://spec.dpg.dev/l1/v1/compile-options.schema.json";

@@ -8,9 +8,9 @@
  * - Types (`Finding`, `CompilerResult`, `CompileOptions`, the Axis X/Y classifications, …) are
  *   generated from `schemas/*.json` and re-exported here.
  * - The schema objects are re-exported as `l1Schemas` (keyed by canonical `$id`) and individually.
- *   The raw `.json` files are also published under the `@dpg/spec/schemas/*` subpath.
+ *   The raw `.json` files are also published under the `@francav/spec/schemas/*` subpath.
  *
- * `@dpg/spec` ships no runtime dependencies and no validator; bring your own JSON Schema validator.
+ * `@francav/spec` ships no runtime dependencies and no validator; bring your own JSON Schema validator.
  */
 export * from "./generated/types.js";
 export * from "./generated/schemas.js";

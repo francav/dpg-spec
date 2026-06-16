@@ -3,7 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { l1Schemas, type CompilerResult, type CompileOptions } from "./index.js";
 
-describe("@dpg/spec public surface", () => {
+describe("@francav/spec public surface", () => {
   it("exposes all six L1 schemas keyed by canonical $id", () => {
     const ids = Object.keys(l1Schemas);
     expect(ids).toHaveLength(6);

@@ -4,7 +4,7 @@
 /* global console, URL */
 import { readFile } from "node:fs/promises";
 
-// Dep-free analog of the reuse-mine fixture runner. @dpg/conformance ships in the L2-free dpg-spec
+// Dep-free analog of the reuse-mine fixture runner. @francav/conformance ships in the L2-free dpg-spec
 // repo, so instead of invoking the compiler it prints the captured golden vectors: each case's
 // summary plus its Axis-Y determinism distribution. Observe the runtime-bound downgrade alongside
 // the policy-dependent baseline, and the missing-contract boundaries on loan-preapproval.

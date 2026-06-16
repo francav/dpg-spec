@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Victor França
 import { readFileSync } from "node:fs";
-import type { PolicySnapshot } from "@dpg/spec";
+import type { PolicySnapshot } from "@francav/spec";
 
 /**
- * Reference governance-policy packs shipped by @dpg/policies. Each pack is a resolved
+ * Reference governance-policy packs shipped by @francav/policies. Each pack is a resolved
  * {@link PolicySnapshot} (one governance tier of the baseline `standard-governance-policy`) that
  * validates against the L1 policy schema. `baseline-tier-1` requires a runtime profile and demands
  * deterministic Axis-Y; `baseline-tier-2` relaxes both for engine-agnostic, policy-dependent work.

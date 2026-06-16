@@ -1,5 +1,5 @@
 {
-  "name": "@dpg/conformance",
+  "name": "@francav/conformance",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -27,6 +27,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@dpg/spec": "*"
+    "@francav/spec": "*"
   }
 }

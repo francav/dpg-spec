@@ -4,7 +4,7 @@
 
 // Generates src/generated/{types,schemas}.ts from the normative JSON Schemas in schemas/.
 // The six schema files are the source of truth; this script is the only thing that writes the
-// generated TypeScript. Run via `npm run gen:types --workspace @dpg/spec`.
+// generated TypeScript. Run via `npm run gen:types --workspace @francav/spec`.
 //
 // For type generation the six files are merged into one in-memory document with every cross-file
 // `$ref` rewritten from its absolute `$id` to a local `#/$defs/...` pointer, so json-schema-to-
