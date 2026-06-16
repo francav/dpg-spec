@@ -30,8 +30,11 @@ jobs:
             echo "Tag $tag does not match package version $version" >&2
             exit 1
           fi
-      # Publish @francav/spec first; profiles, policies, and conformance depend on it.
+      # Publish @francav/spec first; profiles and policies depend on it.
       - run: npm publish --workspace @francav/spec --access public --provenance
       - run: npm publish --workspace @francav/profiles --access public --provenance
       - run: npm publish --workspace @francav/policies --access public --provenance
-      - run: npm publish --workspace @francav/conformance --access public --provenance
+      # @francav/conformance (CC0 test vectors) is intentionally NOT auto-published:
+      # it has never been bootstrapped on npm, and trusted publishing can't do a
+      # brand-new package's first publish. To publish it later: bootstrap once
+      # locally (npm publish from packages/conformance), then re-add the line.
