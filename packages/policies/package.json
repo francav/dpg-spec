@@ -1,6 +1,6 @@
 {
   "name": "@francav/policies",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DPG reference governance-policy packs (baseline-tier-1, baseline-tier-2) validating against the L1 policy schema",
   "license": "Apache-2.0",
   "author": "Victor França",

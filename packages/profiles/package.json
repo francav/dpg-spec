@@ -1,6 +1,6 @@
 {
   "name": "@francav/profiles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DPG reference runtime-profile packs (camunda-7, camunda-8, cib-seven, operaton) validating against the L1 runtime-profile schema",
   "license": "Apache-2.0",
   "author": "Victor França",

@@ -1,6 +1,6 @@
 {
   "name": "@francav/spec",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DPG L1 spec: normative JSON Schemas (draft 2020-12) for the compiler's public I/O contract, with the TypeScript types derived from them",
   "license": "Apache-2.0",
   "author": "Victor França",

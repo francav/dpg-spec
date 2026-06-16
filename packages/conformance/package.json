@@ -1,6 +1,6 @@
 {
   "name": "@francav/conformance",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DPG conformance suite: CC0 BPMN/DMN fixtures plus golden CompilerResult vectors for verifying a DPG-conformant compiler",
   "license": "CC0-1.0",
   "author": "Victor França",
